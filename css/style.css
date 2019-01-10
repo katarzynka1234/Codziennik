@@ -9,4 +9,9 @@ body {
   text-align: center;
 }
 
+.main-box {
+  display: flex;
+  justify-content: space-around;
+}
+
 /*# sourceMappingURL=style.css.map */
