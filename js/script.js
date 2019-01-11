@@ -49,30 +49,55 @@ const form = document.querySelector('form');
 const inputForNewTask = document.querySelector('input.new-task');
 const btnNewTask = document.querySelector('button.add-task');
 const listTasks = document.querySelector('ul.list-tasks');
+const doneListTask = document.querySelector('ul.done-list-tasks');
 const numberTasks = document.querySelector('span.tasks-number');
+const doneNumberTasks = document.querySelector('span.done-tasks-number');
 
-//Main list of task
+//Main lists of task
 const toDoList = []; //list of actual task
+const doneList = []; // lit of done task
 numberTasks.textContent = "Wpisz zadania do wykonania."
 
-// Reload of list of actual task
-const getActualList = () => {
+// Reload of list of actual tasks
+const getActualLists = () => {
     listTasks.textContent = "";
     toDoList.forEach((toDoTask, key) => {
         toDoTask.dataset.key = key;
         listTasks.appendChild(toDoTask);
     })
-    if (toDoList.length === 0) return numberTasks.textContent = "Brak zadań -  masz wolne! :)"
+
+    doneListTask.textContent = "";
+    doneList.forEach((doneTask, key) => {
+        doneTask.dataset.key = key;
+        doneListTask.appendChild(doneTask);
+    })
+
+    if (toDoList.length === 0) {
+        return numberTasks.textContent = "Brak zadań -  masz wolne! :)",
+            doneNumberTasks.textContent = `Super wszystkie ${doneList.length} zadań wykonane!`;
+    }
     numberTasks.textContent = toDoList.length;
+
+    if (doneList.length === 0) return doneNumberTasks.textContent = "Brak ukońcozych zadań - do roboty!";
+    doneNumberTasks.textContent = doneList.length;
+
+
 }
 
 const removeTask = (e) => {
     const index = e.target.parentNode.dataset.key;
     toDoList.splice(index, 1);
-    getActualList();
+    getActualLists();
 }
 
-
+const doneTask = (e) => {
+    const task = e.target.parentNode;
+    doneList.push(task);
+    removeTask(e);
+    task.removeChild(task.children[1]);
+    task.removeChild(task.children[0]);
+    getActualLists();
+}
 
 //Add task to main list of task
 const addTask = (e) => {
@@ -81,11 +106,12 @@ const addTask = (e) => {
     if (task === "") return;
     const newTask = document.createElement('li');
     newTask.className = "task";
-    newTask.innerHTML = task + '<button class="delete">x</button>';
+    newTask.innerHTML = task + '<button class="done">V</button><button class="delete">x</button>';
     toDoList.push(newTask);
     inputForNewTask.value = "";
+    newTask.querySelector('button.done').addEventListener('click', doneTask);
     newTask.querySelector('button.delete').addEventListener('click', removeTask);
-    getActualList();
+    getActualLists();
 
 }
 
