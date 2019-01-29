@@ -118,94 +118,89 @@ const addTask = (e) => {
 form.addEventListener('submit', addTask);
 
 
-// NOTES BOARD
-(function () {
+// STICKY NOTES BOARD
 
+let draggedEl;
+let grabPoinxY;
+let grabPointX;
 
-    var draggedEl,
-        onDragStart,
-        onDrag,
-        onDragEnd,
-        grabPoinxY,
-        grabPointX,
-        createNote,
-        addNoteButtonEl;
+//function for mousedown - get position of sticy note
+const onDragStart = function (e) {
+    let boundingClientRect;
+    if (e.target.className.indexOf('bar') === -1) {
+        return; // not active for class 'bar'
+    }
+    draggedEl = this;
 
-    onDragStart = function (e) {
-        var boundingClientRect;
-        if (e.target.className.indexOf('bar') === -1) {
-            return;
-        }
+    boundingClientRect = draggedEl.getBoundingClientRect();
 
-        draggedEl = this;
+    grabPoinxY = boundingClientRect.top - e.clientY;
+    grabPointX = boundingClientRect.left - e.clientX;
+};
 
-        boundingClientRect = draggedEl.getBoundingClientRect();
-
-        grabPoinxY = boundingClientRect.top - e.clientY;
-        grabPointX = boundingClientRect.left - e.clientX;
-    };
-
-    onDrag = function (e) {
-        if (!draggedEl) {
-            return;
-        }
-
-        var posX = e.clientX + grabPointX;
-        var posY = e.clientY + grabPoinxY;
-
-        if (posX < 0) {
-            posX = 0;
-        }
-        if (posY < 0) {
-            posY = 0;
-        }
-
-        draggedEl.style.transform = `translateX(${posX}px) translateY(${posY}px)`;
+//set position during mosemove and reset for right site
+const onDrag = (e) => {
+    if (!draggedEl) {
+        return;
     }
 
-    onDragEnd = function () {
-        draggedEl = null;
-        grabPointX = null;
-        grabPoinxY = null;
-    };
+    const posX = e.clientX + grabPointX;
+    const posY = e.clientY + grabPoinxY;
 
-    createNote = function () {
-        var stickerEl = document.createElement('div'),
-            barEl = document.createElement('div'),
-            texareaEl = document.createElement('textarea'),
-            deleteBtnElem = document.createElement('button'),
-            onDelete;
-
-
-        var transformCSSValue = `translateX(${Math.random() * 400}px) translateY(${Math.random() * 400}px)`;
-
-        stickerEl.style.transform = transformCSSValue;
-        stickerEl.classList.add('sticker');
-        barEl.classList.add('bar');
-        deleteBtnElem.classList.add('delete-note-btn');
-        deleteBtnElem.textContent = "X";
-
-        barEl.appendChild(deleteBtnElem);
-        stickerEl.appendChild(barEl);
-        stickerEl.appendChild(texareaEl);
-
-        onDelete = function () {
-            document.body.removeChild(stickerEl);
-        }
-
-        deleteBtnElem.addEventListener('click', onDelete, false);
-        stickerEl.addEventListener('mousedown', onDragStart, false);
-
-
-        document.body.appendChild(stickerEl);
+    if (posX < 0) {
+        posX = 0;
+    }
+    if (posY < 0) {
+        posY = 0;
     }
 
+    draggedEl.style.transform = `translateX(${posX}px) translateY(${posY}px)`;
+}
 
+//reset global variable after mouseup
+const onDragEnd = () => {
+    draggedEl = null;
+    grabPointX = null;
+    grabPoinxY = null;
+};
 
-    addNoteButtonEl = document.querySelector('.add-note-button');
-    addNoteButtonEl.addEventListener('click', createNote, false);
-    document.addEventListener('mousemove', onDrag, false);
-    document.addEventListener('mouseup', onDragEnd, false);
+//set HTML element and CSS style for new sticky note
+const createNote = () => {
+    //set elements of sticky note
+    const stickerEl = document.createElement('div');
+    const barEl = document.createElement('div');
+    const texareaEl = document.createElement('textarea');
+    const deleteBtnElem = document.createElement('button');
 
+    let transformCSSValue = `translateX(${Math.random() * 100}px) translateY(${Math.random() * 100}px)`; //random positon of new note
 
-})();
+    //CSS style
+    stickerEl.style.transform = transformCSSValue;
+    stickerEl.classList.add('sticker');
+    barEl.classList.add('bar');
+    deleteBtnElem.classList.add('delete-note-btn');
+    deleteBtnElem.textContent = "X";
+
+    //place elements together
+    barEl.appendChild(deleteBtnElem);
+    stickerEl.appendChild(barEl);
+    stickerEl.appendChild(texareaEl);
+
+    //remove scticy note
+    const onDelete = () => {
+        document.body.removeChild(stickerEl);
+    }
+
+    //plug on Delete to btn 'X'
+    deleteBtnElem.addEventListener('click', onDelete, false);
+    stickerEl.addEventListener('mousedown', onDragStart, false);
+
+    //appent sticky elem to body of HTML
+    document.body.appendChild(stickerEl);
+}
+
+//listening of moseevents
+const addNoteButtonEl = document.querySelector('.add-note-button');
+addNoteButtonEl.addEventListener('click', createNote, false);
+document.addEventListener('mousemove', onDrag, false);
+document.addEventListener('mouseup', onDragEnd, false);
