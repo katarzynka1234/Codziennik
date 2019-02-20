@@ -1,6 +1,12 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:300i,400,900");
 body {
   margin: 0;
   padding: 0;
+  min-height: 100vh;
+  background-image: url(/images/beverage-blank-break-997719.jpg);
+  background-position: left bottom;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .container {
@@ -9,9 +15,75 @@ body {
   text-align: center;
 }
 
-.main-box {
+.main-header {
+  padding: 10px 0;
+}
+
+.main-header h1 {
+  margin-left: 30px;
+  text-transform: uppercase;
+  font-size: 30px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+}
+
+.main-header h1 span.header-description {
+  font-size: 20px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-style: italic;
+  text-transform: lowercase;
+}
+
+main .add-element-box {
+  margin: 20px auto;
+}
+
+main .add-element-box input.new-task {
+  height: 50px;
+  width: 400px;
+  border-radius: 25px;
+  border: 1px solid gray;
+  font-size: 20px;
+  padding: 0px 5px;
+}
+
+main .add-element-box button {
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+  border: 1px solid gray;
+  color: white;
+  font-size: 20px;
+}
+
+main .add-element-box button.add-task {
+  background-color: #558B2F;
+}
+
+main .add-element-box button.add-note-button {
+  background-color: #FF5722;
+}
+
+main .main-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+main .main-box .tasks-box {
+  flex: 3;
   display: flex;
   justify-content: space-around;
+}
+
+main .main-box .actual-data-box {
+  flex: 1;
+  width: 300px;
+  margin: 0 auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5px;
+  color: white;
 }
 
 .sticker {
