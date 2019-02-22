@@ -44,6 +44,7 @@ main .add-element-box input.new-task {
   width: 400px;
   border-radius: 25px;
   border: 1px solid gray;
+  box-shadow: inset 0px 0px 25px -6px rgba(0, 0, 0, 0.75);
   font-size: 20px;
   padding: 0px 5px;
 }
@@ -75,27 +76,102 @@ main .main-box .tasks-box {
   flex: 3;
   display: flex;
   justify-content: space-around;
+  align-items: flex-start;
+  font-size: 18px;
+  font-family: 'Roboto', sans-serif;
+}
+
+main .main-box .tasks-box .tasks-area {
+  background-color: rgba(0, 188, 212, 0.8);
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 14px 1px rgba(0, 0, 0, 0.75);
+}
+
+main .main-box .tasks-box .tasks-area h4 {
+  margin: 5px;
+}
+
+main .main-box .tasks-box .tasks-area span.tasks-number,
+main .main-box .tasks-box .tasks-area span.done-tasks-number {
+  font-weight: 300;
+  font-style: italic;
+}
+
+main .main-box .tasks-box .tasks-area ul {
+  padding-left: 0;
+  width: 300px;
+}
+
+main .main-box .tasks-box .tasks-area ul li {
+  list-style: none;
+  background-color: antiquewhite;
+  padding: 20px 5px 5px;
+  margin: 5px;
+  position: relative;
+}
+
+main .main-box .tasks-box .tasks-area ul li i {
+  position: absolute;
+}
+
+main .main-box .tasks-box .tasks-area ul li i:hover {
+  transform: scale(1.2);
+}
+
+main .main-box .tasks-box .tasks-area ul li i.done {
+  color: green;
+  top: 3px;
+  right: 30px;
+}
+
+main .main-box .tasks-box .tasks-area ul li i.delete {
+  color: red;
+  top: 3px;
+  right: 5px;
 }
 
 main .main-box .actual-data-box {
   flex: 1;
   width: 300px;
   margin: 0 auto;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.8);
   padding: 5px;
+  border-radius: 5px;
   color: white;
+  font-family: 'Roboto', sans-serif;
+}
+
+main .main-box .actual-data-box h3 {
+  font-weight: 300;
+  margin-bottom: 5px;
+}
+
+main .main-box .actual-data-box span.actual-day,
+main .main-box .actual-data-box span.actual-date,
+main .main-box .actual-data-box span.actual-time {
+  font-size: 35px;
+}
+
+main .main-box .actual-data-box span.actual-day {
+  text-transform: capitalize;
+  font-style: italic;
 }
 
 .sticker {
   padding-top: 20px;
-  background-color: yellowgreen;
+  background-color: #FF8A65;
   min-height: 100px;
   min-width: 100px;
   position: absolute;
   left: 0;
   top: 0;
-  border: 1px solid #34b399;
+  border: 1px solid #FF7043;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.sticker:hover {
+  z-index: 1;
 }
 
 .sticker .bar {
@@ -103,8 +179,24 @@ main .main-box .actual-data-box {
   top: 0;
   left: 0;
   height: 20px;
-  background: #34b399;
+  background: #FF8A65;
   width: 100%;
+}
+
+.sticker .bar:hover {
+  cursor: pointer;
+  background: #BF360C;
+}
+
+.sticker .bar i.delete-note-btn {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  color: white;
+}
+
+.sticker .bar i.delete-note-btn:hover {
+  transform: scale(1.2);
 }
 
 .sticker textarea {
@@ -114,27 +206,9 @@ main .main-box .actual-data-box {
   min-width: 100px;
   background: transparent;
   border: none;
-}
-
-.sticker .bar:hover {
-  cursor: move;
-  background: #a0e4d6;
-}
-
-.sticker:hover {
-  z-index: 1;
-}
-
-button.delete-note-btn {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background: red;
-  border: none;
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
   outline: none;
-  height: 20px;
-  width: 20px;
-  border-radius: 50%;
 }
 
 /*# sourceMappingURL=style.css.map */

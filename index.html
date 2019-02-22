@@ -18,26 +18,30 @@
     <main class="container">
         <div class="add-element-box">
             <form>
-                <input type="text" class="new-task">
+                <input type="text" class="new-task" placeholder="Wpisz nowe zadanie">
                 <button type="submit" class="add-task"><i class="fas fa-sign-in-alt"></i></button>
                 <button class="add-note-button"><i class="far fa-sticky-note"></i></button>
             </form>
         </div>
         <div class="main-box">
             <div class="tasks-box">
-                <div>
-                    <h4>Zadania do wykonania: <span class="tasks-number"></span></h4>
+                <div class="tasks-area">
+                    <h4>Zadania do wykonania: </h4>
+                    <span class="tasks-number"></span>
                     <ul class="list-tasks"></ul>
                 </div>
-                <div>
-                    <h4>Wykonane zadania: <span class="done-tasks-number"></span></h4>
+                <div class="tasks-area">
+                    <h4>Wykonane zadania: </h4>
+                    <span class="done-tasks-number"></span>
                     <ul class="done-list-tasks"></ul>
                 </div>
             </div>
             <div class="actual-data-box">
-                <h3>Dziś mamy: <span class=" actual-day""></span></h3>
-                <h3>Godzina:<span class="
-                        actual-time"></span></h3>
+                <h3>Dziś mamy: </h3>
+                <span class="actual-day"></span> <br>
+                <span class="actual-date"></span>
+                <h3>Godzina:</h3>
+                <span class="actual-time"></span>
             </div>
         </div>
 

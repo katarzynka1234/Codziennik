@@ -3,6 +3,7 @@ const time = new Date();
 const day = time.getDay();
 let actualDay;
 const actualDaySpan = document.querySelector('span.actual-day');
+const actualDateSpan = document.querySelector('span.actual-date');
 
 switch (day) {
     case 0:
@@ -28,6 +29,12 @@ switch (day) {
         break;
 }
 actualDaySpan.textContent = actualDay;
+
+const dayNumber = time.getDate() < 10 ? "0" + time.getDate() : time.getDate();
+const monthNumber = (time.getMonth() + 1) < 10 ? "0" + (time.getMonth() + 1) : time.getMonth() + 1;
+const yearNumber = time.getFullYear();
+
+actualDateSpan.textContent = dayNumber + "." + monthNumber + "." + yearNumber;
 
 // Set a time
 const clock = () => {
@@ -85,17 +92,26 @@ const getActualLists = () => {
 }
 
 const removeTask = (e) => {
+    console.log(e);
     const index = e.target.parentNode.dataset.key;
-    toDoList.splice(index, 1);
+    const ulIndex = e.target.parentNode.parentNode;
+    if (ulIndex.className === "list-tasks") {
+        toDoList.splice(index, 1);
+    } else {
+        doneList.splice(index, 1);
+    }
+
     getActualLists();
 }
 
 const doneTask = (e) => {
     const task = e.target.parentNode;
-    doneList.push(task);
-    removeTask(e);
-    task.removeChild(task.children[1]);
+    const index = task.dataset.key;
+    toDoList.splice(index, 1);
+    // task.removeChild(task.children[1]);
     task.removeChild(task.children[0]);
+    doneList.push(task);
+
     getActualLists();
 }
 
@@ -106,11 +122,11 @@ const addTask = (e) => {
     if (task === "") return;
     const newTask = document.createElement('li');
     newTask.className = "task";
-    newTask.innerHTML = task + '<button class="done">V</button><button class="delete">x</button>';
+    newTask.innerHTML = task + '<i class="fas fa-check-circle done"></i><i class="fas fa-times-circle delete"></i>';
     toDoList.push(newTask);
     inputForNewTask.value = "";
-    newTask.querySelector('button.done').addEventListener('click', doneTask);
-    newTask.querySelector('button.delete').addEventListener('click', removeTask);
+    newTask.querySelector('i.done').addEventListener('click', doneTask);
+    newTask.querySelector('i.delete').addEventListener('click', removeTask);
     getActualLists();
 
 }
@@ -170,7 +186,7 @@ const createNote = () => {
     const stickerEl = document.createElement('div');
     const barEl = document.createElement('div');
     const texareaEl = document.createElement('textarea');
-    const deleteBtnElem = document.createElement('button');
+    const deleteBtnElem = document.createElement('i');
 
     let transformCSSValue = `translateX(${Math.random() * 100}px) translateY(${Math.random() * 100}px)`; //random positon of new note
 
@@ -178,8 +194,10 @@ const createNote = () => {
     stickerEl.style.transform = transformCSSValue;
     stickerEl.classList.add('sticker');
     barEl.classList.add('bar');
-    deleteBtnElem.classList.add('delete-note-btn');
-    deleteBtnElem.textContent = "X";
+    deleteBtnElem.classList.add('fas')
+    deleteBtnElem.classList.add('fa-times-circle');
+    deleteBtnElem.classList.add('delete-note-btn')
+
 
     //place elements together
     barEl.appendChild(deleteBtnElem);
