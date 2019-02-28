@@ -1,14 +1,20 @@
+//@import 'mobile';
 @import url('https://fonts.googleapis.com/css?family=Roboto:300i,400,900');
 
 body {
     margin: 0;
     padding: 0;
-    min-height: 100vh;
+    height: 100vh;
     background-image: url(../images/beverage-blank-break-997719.jpg);
+    background-attachment: fixed;
     background-position: left bottom;
     background-size: cover;
     background-repeat: no-repeat;
+
 }
+
+
+
 
 .container {
     max-width: 1200px;
@@ -221,5 +227,47 @@ main {
         font-family: 'Roboto', sans-serif;
         font-size: 15px;
         outline: none;
+    }
+}
+
+
+//RWD //
+@media (max-width: 767px) {
+    .main-header {
+        margin: 0;
+
+        h1 {
+            margin: 0;
+            text-align: center
+        }
+    }
+
+    main {
+        .add-element-box {
+            margin: 10px auto;
+
+            input.new-task {
+                width: 80vw;
+                font-size: 15px;
+            }
+
+            button.add-note-button {
+                display: none;
+            }
+        }
+
+        .main-box {
+            flex-direction: column;
+
+            .tasks-box {
+                margin: 10px auto;
+                flex-direction: column;
+
+                .tasks-area {
+                    margin: 10px auto;
+                }
+            }
+
+        }
     }
 }

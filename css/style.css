@@ -2,8 +2,9 @@
 body {
   margin: 0;
   padding: 0;
-  min-height: 100vh;
+  height: 100vh;
   background-image: url(../images/beverage-blank-break-997719.jpg);
+  background-attachment: fixed;
   background-position: left bottom;
   background-size: cover;
   background-repeat: no-repeat;
@@ -209,6 +210,36 @@ main .main-box .actual-data-box span.actual-day {
   font-family: 'Roboto', sans-serif;
   font-size: 15px;
   outline: none;
+}
+
+@media (max-width: 767px) {
+  .main-header {
+    margin: 0;
+  }
+  .main-header h1 {
+    margin: 0;
+    text-align: center;
+  }
+  main .add-element-box {
+    margin: 10px auto;
+  }
+  main .add-element-box input.new-task {
+    width: 80vw;
+    font-size: 15px;
+  }
+  main .add-element-box button.add-note-button {
+    display: none;
+  }
+  main .main-box {
+    flex-direction: column;
+  }
+  main .main-box .tasks-box {
+    margin: 10px auto;
+    flex-direction: column;
+  }
+  main .main-box .tasks-box .tasks-area {
+    margin: 10px auto;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
