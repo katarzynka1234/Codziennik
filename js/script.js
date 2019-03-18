@@ -63,7 +63,7 @@ const doneNumberTasks = document.querySelector('span.done-tasks-number');
 //Main lists of task
 const toDoList = []; //list of actual task
 const doneList = []; // lit of done task
-numberTasks.textContent = "Wpisz zadania do wykonania."
+numberTasks.textContent = "Wyznacz sobie zadania do wykonania na dziś."
 
 // Reload of list of actual tasks
 const getActualLists = () => {
@@ -79,20 +79,29 @@ const getActualLists = () => {
         doneListTask.appendChild(doneTask);
     })
 
+    getStatusList();
+
+}
+
+
+const getStatusList = () => {
     if (toDoList.length === 0) {
-        return numberTasks.textContent = "Brak zadań -  masz wolne! :)",
+        return numberTasks.textContent = "Wszystkie zadania wykonane -  masz wolne! :)",
             doneNumberTasks.textContent = `Super! Wszystkie ${doneList.length} zadań wykonane!`;
     }
     numberTasks.textContent = toDoList.length;
-
-    if (doneList.length === 0) return doneNumberTasks.textContent = "Brak ukońcozych zadań - do roboty!";
     doneNumberTasks.textContent = doneList.length;
+
+    if (doneList.length === 0) {
+        return doneNumberTasks.textContent = "Brak ukończonych zadań - bierz się do pracy!"
+
+    }
 
 
 }
 
+
 const removeTask = (e) => {
-    console.log(e);
     const index = e.target.parentNode.dataset.key;
     const ulIndex = e.target.parentNode.parentNode;
     if (ulIndex.className === "list-tasks") {
@@ -204,7 +213,7 @@ const createNote = () => {
     stickerEl.appendChild(barEl);
     stickerEl.appendChild(texareaEl);
 
-    //remove scticy note
+    //remove scticky note
     const onDelete = () => {
         document.body.removeChild(stickerEl);
     }
@@ -213,7 +222,7 @@ const createNote = () => {
     deleteBtnElem.addEventListener('click', onDelete, false);
     stickerEl.addEventListener('mousedown', onDragStart, false);
 
-    //appent sticky elem to body of HTML
+    //append sticky elem to body of HTML
     document.body.appendChild(stickerEl);
 }
 
