@@ -50,6 +50,10 @@ main .add-element-box input.new-task {
   padding: 0px 5px;
 }
 
+main .add-element-box input.new-task:focus {
+  outline: none;
+}
+
 main .add-element-box button {
   height: 50px;
   width: 50px;
@@ -212,7 +216,7 @@ main .main-box .actual-data-box span.actual-day {
   outline: none;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1028px) {
   .main-header {
     margin: 0;
   }
@@ -225,6 +229,7 @@ main .main-box .actual-data-box span.actual-day {
   }
   main .add-element-box input.new-task {
     width: 80vw;
+    height: 30px;
     font-size: 15px;
   }
   main .add-element-box button.add-note-button {
@@ -234,11 +239,15 @@ main .main-box .actual-data-box span.actual-day {
     flex-direction: column;
   }
   main .main-box .tasks-box {
-    margin: 10px auto;
+    margin: 0px auto 10px;
     flex-direction: column;
   }
   main .main-box .tasks-box .tasks-area {
-    margin: 10px auto;
+    margin: 0px auto 5px;
+    max-width: 90%;
+  }
+  main .main-box .tasks-box .tasks-area ul li.task {
+    word-wrap: break-word;
   }
 }
 

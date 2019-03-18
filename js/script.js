@@ -87,7 +87,7 @@ const getActualLists = () => {
 const getStatusList = () => {
     if (toDoList.length === 0) {
         return numberTasks.textContent = "Wszystkie zadania wykonane -  masz wolne! :)",
-            doneNumberTasks.textContent = `Super! Wszystkie ${doneList.length} zadań wykonane!`;
+            doneNumberTasks.textContent = `Super! Wszystkie zadania wykonane!`;
     }
     numberTasks.textContent = toDoList.length;
     doneNumberTasks.textContent = doneList.length;
